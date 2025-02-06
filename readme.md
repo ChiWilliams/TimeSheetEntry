@@ -5,7 +5,7 @@ It's written for personal use, so take it with a grain of salt.
 I did not write any lines of code for this project; I had Claude Sonnet 3.6 write the entire project and wrote up the experience in [this blog post](https://liquidbrain.net/blog/reflections-on-an-llm-only-coding-project/). 
 
 ## Time tracking spreadsheet
-This extension only works for a time tracking spreadsheet with the following columns in this exact order:
+This extension only works for a time tracking spreadsheet with the following columns in this exact order:  
 `Date | Name | Time In | Time Out | Activity | Work Scope | Prio | Energy | Flow | Tags | Notes`
 
 But of course you could modify this code as necessary.
