@@ -1,0 +1,70 @@
+// sheetsService.js
+
+class SheetsService {
+  constructor() {
+    this.SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID'; // TODO: Replace this when setting up
+    this.SHEET_NAME = 'Sheet 1'; // TODO: REplace this with your sheet name
+    this.API_BASE = 'https://sheets.googleapis.com/v4/spreadsheets';
+  }
+
+  formatDate(dateStr) {
+    // Create date in Pacific time
+    const date = new Date(dateStr);
+    const pacificDate = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/Los_Angeles', // TODO: Enter your timezone
+      month: '2-digit',
+      day: '2-digit',
+      year: 'numeric'
+    }).format(date);
+    return pacificDate;
+  }
+
+  async appendRow(data) {
+    try {
+      // Get the auth token from background script
+      const token = await browser.runtime.sendMessage({ type: 'getAuthToken' });
+      
+      // Format the data into a row with correct order and formatting
+      const values = [[
+        this.formatDate(data.date),  // Date in MM/DD/YYYY
+        'YOUR_NAME',                 // Name #TODO: Enter your Name!
+        data.timeIn,                 // Time in
+        data.timeOut,                // Time out
+        data.activity,               // Activity
+        data.workScope,              // Work scope
+        data.prioritization,         // Prio
+        data.energy,                 // Energy
+        data.engagement,             // Flow
+        data.tags,                   // Tags
+        data.notes                   // Notes
+      ]];
+
+      // Make the API request
+      const response = await fetch(
+        `${this.API_BASE}/${this.SPREADSHEET_ID}/values/${this.SHEET_NAME}:append?valueInputOption=USER_ENTERED`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            values: values
+          })
+        }
+      );
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(`API Error: ${error.error?.message || 'Unknown error'}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Error appending row:', error);
+      throw error;
+    }
+  }
+}
+
+export default new SheetsService();

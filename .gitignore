@@ -1,0 +1,9 @@
+# Config files
+background/background.js
+popup/sheetsService.js
+
+# Dev files
+.DS_Store
+node_modules/
+
+web-ext-artifacts/

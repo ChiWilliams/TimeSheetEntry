@@ -1,0 +1,139 @@
+body {
+    width: 400px;
+    padding: 16px;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  
+  .form-group {
+    margin-bottom: 16px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .shortcuts {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+  }
+  
+  .scope-buttons {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .scope-buttons button {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .scope-buttons button:hover {
+    border-color: #999;
+    background: #f5f5f5;
+  }
+  
+  .scope-buttons button.active {
+    background: #e0e0e0;
+    border-color: #666;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .ratings {
+    margin-top: 16px;
+  }
+  
+  .rating-inputs {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .rating-field {
+    flex: 1;
+  }
+  
+  .rating-field input {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .rating-labels {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  
+  .rating-label {
+    flex: 1;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+  }
+  
+  .tags-container {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px;
+    min-height: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  
+  #tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  
+  .tag {
+    background: #e0e0e0;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .tag button {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  #tags-input {
+    border: none;
+    outline: none;
+    padding: 4px;
+    flex: 1;
+    min-width: 60px;
+  }
+  
+  .error {
+    color: #d32f2f;
+    margin-top: 8px;
+    font-size: 14px;
+  }

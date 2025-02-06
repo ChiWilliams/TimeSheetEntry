@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <form id="timesheet-form">
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input type="text" id="date" readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="time-in">Time In</label>
+      <input type="text" id="time-in" pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$" required>
+      <div class="shortcuts">Alt+L: Last out | Alt+N: Now</div>
+    </div>
+
+    <div class="form-group">
+      <label for="time-out">Time Out</label>
+      <input type="text" id="time-out" pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$" required>
+      <div class="shortcuts">Alt+N: Now</div>
+    </div>
+
+    <div class="form-group">
+      <label for="activity">Activity</label>
+      <input type="text" id="activity" list="recent-activities" required>
+      <datalist id="recent-activities"></datalist>
+    </div>
+
+    <div class="form-group">
+      <label>Work Scope</label>
+      <div class="scope-buttons">
+        <button type="button" data-scope="Core">Core (C)</button>
+        <button type="button" data-scope="Adjacent">Adjacent (A)</button>
+        <button type="button" data-scope="Personal">Personal (P)</button>
+      </div>
+      <input type="hidden" id="work-scope" required>
+    </div>
+
+    <div class="form-group ratings">
+      <label>Ratings (1-5)</label>
+      <div class="rating-inputs">
+        <div class="rating-field">
+          <input type="number" id="prioritization" min="1" max="5" placeholder="Prio">
+        </div>
+        <div class="rating-field">
+          <input type="number" id="energy" min="1" max="5" required placeholder="Energy">
+        </div>
+        <div class="rating-field">
+          <input type="number" id="engagement" min="1" max="5" required placeholder="Flow">
+        </div>
+      </div>
+      <div class="rating-labels">
+        <span class="rating-label">Prioritization</span>
+        <span class="rating-label">Energy Level</span>
+        <span class="rating-label">Flow State</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="tags">Tags</label>
+      <div class="tags-container">
+        <div id="tags-list"></div>
+        <input type="text" id="tags-input" list="tag-suggestions">
+        <datalist id="tag-suggestions"></datalist>
+      </div>
+      <input type="hidden" id="tags" name="tags">
+    </div>
+
+    <div class="form-group">
+      <label for="notes">Notes</label>
+      <input type="text" id="notes">
+    </div>
+
+    <div class="form-actions">
+      <button type="submit">Submit (Ctrl+Enter)</button>
+      <div id="error-message" class="error"></div>
+    </div>
+  </form>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

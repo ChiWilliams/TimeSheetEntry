@@ -1,0 +1,53 @@
+browser.runtime.onInstalled.addListener(() => {
+    // Initialize storage with default values
+    browser.storage.local.set({
+      recentActivities: [],
+      lastClockOut: null,
+      sheetConfig: null
+    });
+  });
+  
+  // OAuth config
+  const CLIENT_ID = 'YOUR_CLIENT_ID'; //TODO: Replace with your OAuth Client ID
+  const REDIRECT_URL = browser.identity.getRedirectURL();
+  const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
+  
+  async function getAuthToken() {
+    try {
+      // Construct the auth URL
+      const authUrl = new URL('https://accounts.google.com/o/oauth2/v2/auth');
+      authUrl.searchParams.append('client_id', CLIENT_ID);
+      authUrl.searchParams.append('response_type', 'token');
+      authUrl.searchParams.append('redirect_uri', REDIRECT_URL);
+      authUrl.searchParams.append('scope', SCOPES.join(' '));
+  
+      // Launch the auth flow
+      const responseUrl = await browser.identity.launchWebAuthFlow({
+        interactive: true,
+        url: authUrl.toString()
+      });
+  
+      // Extract the access token from the response URL
+      const token = new URL(responseUrl).hash
+        .substring(1)
+        .split('&')
+        .find(param => param.startsWith('access_token='))
+        ?.split('=')[1];
+  
+      if (!token) {
+        throw new Error('No access token found in response');
+      }
+  
+      return token;
+    } catch (error) {
+      console.error('Auth error:', error);
+      throw error;
+    }
+  }
+  
+  // Handle messages from popup
+  browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.type === 'getAuthToken') {
+      return getAuthToken();
+    }
+  });

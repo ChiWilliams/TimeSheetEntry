@@ -1,0 +1,40 @@
+{
+    "manifest_version": 3,
+    "name": "Timesheet Tracker",
+    "version": "1.0.0",
+    "description": "A time tracking extension that integrates with Google Sheets",
+    "permissions": [
+      "storage",
+      "identity"
+    ],
+    "host_permissions": [
+      "https://sheets.googleapis.com/*",
+      "https://accounts.google.com/*"
+    ],
+    "action": {
+      "default_popup": "popup/popup.html",
+      "default_icon": {
+        "16": "icons/icon16.png",
+        "32": "icons/icon32.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+      }
+    },
+    "commands": {
+      "_execute_action": {
+        "suggested_key": {
+          "default": "Alt+M"
+        },
+        "description": "Open time tracking popup"
+      }
+    },
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "timesheet-tracker@kai-williams.com",
+        "strict_min_version": "109.0"
+      }
+    },
+    "background": {
+      "scripts": ["background/background.js"]
+    }
+  }
